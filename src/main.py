@@ -1,16 +1,18 @@
 import pandas as pd
-from files.loading import load_raw_games_file
-from files.cleaning import clean_data
+from pathlib import Path
 
+from data.nba_api_loader import load_api_data
+from data import cleanup
+
+def preprocessing():
+    print('penits')
 
 def main():
     """Main function to load and display NBA games data."""
-    df = load_raw_games_file()
-    print(df.sample(10))
-    print(df.columns)
-    print(df.isnull().sum())
-    df_cleaned = clean_data(df)
-    print(df_cleaned.isnull().sum())
+    if not Path('../data/processed/nba_ALL_SEASONS_MATCHED.csv').exists():
+        load_api_data(list(range(2008, 2026)))
+    
+    cleanup.main()
 
 if __name__ == "__main__":
     main()
