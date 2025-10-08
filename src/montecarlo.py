@@ -16,15 +16,23 @@ df['rest_category_encoded'] = df['rest_category'].astype('category')
 # Define features
 features = [
     'eFG_pct_avg_last_20', 'tov_rate_avg_last_20', 'oreb_pct_avg_last_20', 'ftr_avg_last_20',
-    'ortg_avg_last_20', 'drtg_avg_last_20', 'covered_avg_last_20', 
+    'ortg_avg_last_20', 'drtg_avg_last_20', 'covered_avg_last_20',     
+    'opp_ortg_avg_last_20', 'opp_drtg_avg_last_20',
+    'eFG_pct_avg_last_10', 'tov_rate_avg_last_10', 'oreb_pct_avg_last_10', 'ftr_avg_last_10',
+    'ortg_avg_last_10', 'drtg_avg_last_10', 'covered_avg_last_10',     
+    'opp_ortg_avg_last_10', 'opp_drtg_avg_last_10',
     'eFG_pct_avg_last_5', 'tov_rate_avg_last_5', 'oreb_pct_avg_last_5', 'ftr_avg_last_5',
     'ortg_avg_last_5', 'drtg_avg_last_5', 'covered_avg_last_5', 
-    # 'days_of_rest', 
-    # 'opp_days_of_rest',
-    'home_team', 
-    'opp_ortg_avg_last_20', 'opp_drtg_avg_last_20',
     'opp_ortg_avg_last_5', 'opp_drtg_avg_last_5',
-    'rest_category_encoded'
+    'rebound_last_10_diff',
+    'margin_avg_last_10', 'opp_margin_avg_last_10',
+    'home_team', 
+    # 'pace_diff', 
+    'rest_diff',
+    'pace_last_10', 'opp_pace_last_10',
+    'adj_off_eff', 'adj_def_eff',
+    'wl_last_10',
+    'fatigue_index',
 ]
 
 target = 'covered'
@@ -82,7 +90,7 @@ print(f"Actual total units won: {bets['bet_outcome'].sum():.2f}")
 
 # ===== MONTE CARLO SIMULATION =====
 n_simulations = 10000
-n_bets = len(bets)
+n_bets = 10000
 bet_outcomes = bets['bet_outcome'].values
 
 # Storage for results
